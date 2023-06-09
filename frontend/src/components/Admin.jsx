@@ -28,7 +28,7 @@ export default function Admin(props) {
 
   const navigation = [
     { name: "Dashboard", href: "./dashboard", current: props.dashboard },
-    { name: "Employees", href: "./employees", current: props.students },
+    { name: "Employees", href: "./employees", current: props.employees },
   ];
   
   return (
