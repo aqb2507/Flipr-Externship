@@ -3,6 +3,8 @@ import { Alert, Spinner } from "flowbite-react";
 import { LockClosedIcon, ArrowLeftCircleIcon } from "@heroicons/react/20/solid";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import MainLogo from "../../assets/main-logo.png";
 import { addUser, reset } from "../../features/users/userSlice";
 
@@ -13,7 +15,7 @@ export default function Register() {
     role: "",
     dept: "",
     contact: "",
-    join_date: "",
+    join_date: new Date(),
     password: "",
     confirmPassword: "",
   });
@@ -44,6 +46,13 @@ export default function Register() {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleDateChange = (date) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      selectedDate: date,
     }));
   };
 
@@ -215,12 +224,12 @@ export default function Register() {
                     type="button"
                     disabled
                   >
-                    Joining Date
+                    DoJ
                   </button>
                   <label htmlFor="join-date" className="sr-only">
                     Joining Date
                   </label>
-                  <input
+                  {/* <input
                     id="join-date"
                     name="date"
                     type="date"
@@ -229,6 +238,13 @@ export default function Register() {
                     required
                     className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm datepicker-input"
                     placeholder="Joining Date"
+                  /> */}
+                  <DatePicker
+                    name="join-date"
+                    selected={join_date}
+                    onChange={handleDateChange}
+                    className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm"
+                    placeholderText="Select a date"
                   />
                 </div>
               </div>
