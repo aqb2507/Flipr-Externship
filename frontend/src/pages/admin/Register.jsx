@@ -79,7 +79,7 @@ export default function Register() {
 
   return (
     <>
-      <a onClick={() => navigate("/admin/students")}>
+      <a onClick={() => navigate("/admin/employees")}>
         <ArrowLeftCircleIcon
           className="h-10 w-10 absolute m-4 text-teal-500 hover:text-teal-600 cursor-pointer"
           aria-hidden="true"
@@ -95,7 +95,7 @@ export default function Register() {
               width={70}
             />
             <h2 className="mt-2 text-center text-3xl font-bold tracking-tight text-gray-900">
-              Add New Employee
+              Add New User
             </h2>
           </div>
           {error ? <ErrorContainer /> : <></>}
@@ -154,7 +154,7 @@ export default function Register() {
                     onChange={onChange}
                     required
                   >
-                    <option>Choose a Role</option>
+                    <option>Select a Role</option>
                     <option value="Admin">Admin </option>
                     <option value="Employee">Employee</option>
                   </select>
@@ -181,10 +181,11 @@ export default function Register() {
                     onChange={onChange}
                     required
                   >
-                    <option>Choose a Dept</option>
+                    <option>Select a Dept</option>
                     <option value="IT">IT </option>
                     <option value="Finance">Finance</option>
                     <option value="Marketing">Marketing </option>
+                    <option value="Administration">Administration </option>
                     <option value="Human Resources">Human Resources </option>
                     <option value="Operations Management">Operations Management </option>
                   </select>
@@ -208,19 +209,28 @@ export default function Register() {
               </div>
 
               <div>
-                <label htmlFor="join-date" className="sr-only">
-                  Joining Date
-                </label>
-                <input
-                  id="join-date"
-                  name="join-date"
-                  type="datetime-local"
-                  value={join_date}
-                  onChange={onChange}
-                  required
-                  className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 capitalize px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm"
-                  placeholder="Joining Date"
-                />
+                <div className="flex">
+                  <button
+                    className="relative block w-max appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm"
+                    type="button"
+                    disabled
+                  >
+                    Joining Date
+                  </button>
+                  <label htmlFor="join-date" className="sr-only">
+                    Joining Date
+                  </label>
+                  <input
+                    id="join-date"
+                    name="date"
+                    type="date"
+                    value={join_date}
+                    onChange={onChange}
+                    required
+                    className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm datepicker-input"
+                    placeholder="Joining Date"
+                  />
+                </div>
               </div>
 
               <div>

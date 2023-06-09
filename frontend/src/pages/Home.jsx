@@ -2,21 +2,10 @@ import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useSelector} from 'react-redux'
-import { useEffect } from "react";
 import MainLogo from "../assets/main-logo.png"
 import Monitoring from "../assets/monitoring.png"
 
 export default function Home() {
-
-  const navigate = useNavigate()
-  const {user} = useSelector((state) => state.auth)
-
-  useEffect(() => {
-    if(user){
-      navigate("student/dashboard")
-    }
-  },[user, navigate])
 
   return (
     <>
@@ -100,7 +89,7 @@ export default function Home() {
             <main className="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
               <div className="sm:text-center lg:text-left">
                 <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-                  <span className="block xl:inline">Employee Work Monitoring</span>{" "}
+                  <span className="block xl:inline">Work Monitoring</span>{" "}
                   <span className="block text-teal-600 xl:inline">
                     Made easy for you
                   </span>

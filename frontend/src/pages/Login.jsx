@@ -105,12 +105,12 @@ export default function Login() {
             <h2 className="mt-3 mb-3 text-center text-3xl font-bold tracking-tight text-gray-900">
               Sign in to your account
             </h2>
-            <p className="mb-3 text-center text-sm text-gray-600">
+            {/* <p className="mb-3 text-center text-sm text-gray-600">
               Or{' '}
               <a href="/register" className="font-medium text-teal-600 hover:text-teal-500">
                 New here
               </a>
-            </p>
+            </p> */}
             {error ? <ErrorContainer /> : <></>}
             {message ? <SuccessContainer /> : <></>}
           </div>
