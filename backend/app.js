@@ -18,7 +18,9 @@ app.use(express.urlencoded({ extended: true }))
 
 // router
 const users = require('./routes/userRoutes')
+const tasks = require('./routes/taskRoutes')
 app.use('/api/users', users)
+app.use('/api/tasks', tasks)
 
 app.use(errorHandler)
 
