@@ -13,6 +13,7 @@ import Footer from "./pages/Footer";
 import Register from "./pages/admin/Register";
 import Employees from "./pages/admin/Employees";
 import AdminDashboard from "./pages/admin/Dashboard";
+import CreateTask from "./pages/employee/CreateTask";
 import EmployeeDashboard from "./pages/employee/Dashboard";
 import Admin from "./components/Admin"
 import Employee from "./components/Employee";
@@ -90,7 +91,14 @@ function App() {
               }
             />
           </Route>
-
+          <Route element={<EmployeeLayout />}>
+            <Route
+              path="employee/tasks"
+              element={
+                user ? <Employee EmployeeComponent={<CreateTask/>} /> : <Navigate replace to="/login" />
+              }
+            />
+          </Route>
           {/* Public Routes */}
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
