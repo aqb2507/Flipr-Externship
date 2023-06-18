@@ -6,8 +6,7 @@ const API_URL = "http://localhost:9000/api/tasks/";
 const addTask = async (TaskData, token) => {
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`
     },
   };
 
@@ -17,14 +16,14 @@ const addTask = async (TaskData, token) => {
 };
 
 // Get all tasks
-const getTasks = async (token) => {
+const getTasks = async (token, empId) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const response = await axios.get(API_URL, config);
+  const response = await axios.get(API_URL + `${empId}`, config);
 
   return response.data;
 };

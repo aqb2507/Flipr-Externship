@@ -1,19 +1,63 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Chart } from "react-google-charts";
+import { getTasks } from "../../features/tasks/taskSlice";
 
 export default function EmployeeDashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
+  const { tasks } = useSelector((state) => state.tasks);
 
   useEffect(() => {
     if (!user) {
       navigate("/login");
     }
-    // console.log(submissions.length)
-    //dispatch(getSubmissions());
+    // console.log(tasks.length)
+    dispatch(getTasks());
   }, [user, dispatch, navigate]);
+
+  const checkIfYesterday = (day,today) => {
+    (day.getDate() === (today.getDate() - 1)) ? true : false;
+  }
+
+  const checkIfToday = (entry,today) => {
+    (entry.start_time.getDate() === today.getDate()) ? true : false;
+  }
+  const totaltasks = tasks.length;
+  const today = new Date();
+
+  const breaks = tasks.filter(
+    (task) =>
+      task.category === "Break" 
+  );
+
+  const meetings = tasks.filter(
+    (task) =>
+      task.category === "Meeting" 
+  );
+
+  const workTasks = tasks.filter(
+    (task) =>
+      task.category === "Work" 
+  );
+
+  const data = [
+    // ["Activity", "Frequency"],
+    // ["Break", breaks.length],
+    // ["Meeting", meetings.length],
+    // ["Work", workTasks.length],
+    ["Activity", "Frequency"],
+    ["Break", 1],
+    ["Meeting", 2],
+    ["Work", 3],
+  ];
+
+  const options = {
+    title: "Activity Status",
+    is3D: true,
+  };
 
   return (
     <>
@@ -32,8 +76,17 @@ export default function EmployeeDashboard() {
       </header>
       <main className="min-h-screen">
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-          <div className="px-4 py-6 sm:px-0"></div>
-          {/* /End replace */}
+          <div>
+            <div className="grid grid-cols-1 mx-2 gap-6 md:grid-cols-2">
+              <Chart
+                chartType="PieChart"
+                data={data}
+                options={options}
+                width={"100%"}
+                height={"400px"}
+              />
+            </div>
+          </div>
         </div>
       </main>
     </>

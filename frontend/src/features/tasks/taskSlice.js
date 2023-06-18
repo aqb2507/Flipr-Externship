@@ -31,10 +31,10 @@ export const addTask = createAsyncThunk(
 // Get all tasks
 export const getTasks = createAsyncThunk(
   'tasks/getTasks',
-  async (_, thunkAPI) => {
+  async ({ empId }, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await taskService.getTasks(token)
+      return await taskService.getTasks(token, empId)
     } catch (error) {
       const message =
         (error.response &&
