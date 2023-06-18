@@ -28,17 +28,18 @@ const addTask = asyncHandler( async (req, res) => {
         category: req.body.category,
         start_time: req.body.start_time,
         duration: req.body.duration,
+        creator: req.user._id
     });
     
     res.status(200).json(task);
 })
 
-// @desc    Get Employee tasks
-// @route   GET /api/tasks
+// @desc    Get all tasks added by an Employee
+// @route   GET /api/tasks/:empId
 // @access  Private
 
 const getTasks = asyncHandler( async (req, res) => {
-    const tasks = await Task.find({ user: req.user.id });
+    const tasks = await Task.find({ creator: req.params.empId });
     res.status(200).json(tasks);
 })
 

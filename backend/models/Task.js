@@ -16,6 +16,11 @@ const taskSchema = new mongoose.Schema({
     duration: {
         type: Number,
         required: [true, 'Please enter the duration']
+    },
+    creator: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Employee',
+        required: true
     }
 }, 
     {
