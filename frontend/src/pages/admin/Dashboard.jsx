@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import moment from "moment";
-import { getEmployees } from "../../features/users/userSlice";
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import moment from 'moment';
+import { getEmployees } from '../../features/users/userSlice';
 
 export default function AdminDashboard() {
   const dispatch = useDispatch();
@@ -10,13 +10,12 @@ export default function AdminDashboard() {
   const { user } = useSelector((state) => state.auth);
   const { employees } = useSelector((state) => state.users);
 
-
   useEffect(() => {
     if (!user) {
-      navigate("/login");
+      navigate('/login');
     }
     // console.log(submissions.length)
-    dispatch(getEmployees())
+    dispatch(getEmployees());
   }, [user, dispatch, navigate]);
 
   return (
@@ -33,18 +32,17 @@ export default function AdminDashboard() {
           <div>
             <div className="grid grid-rows-1 mx-2 gap-4 ">
               <div className="grid grid-cols-3 my-10 gap-4">
-
                 <a
                   href="./employees"
                   className="block p-6 max-w-full  bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700"
                 >
                   <div className="flex justify-between">
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    Employees
-                  </h5>
-                  <p className=" font-semibold font-mono text-3xl text-gray-700 dark:text-gray-400">
-                    {employees.length}
-                  </p>
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      Employees
+                    </h5>
+                    <p className=" font-semibold font-mono text-3xl text-gray-700 dark:text-gray-400">
+                      {employees.length}
+                    </p>
                   </div>
                   <div
                     id="assignments_container"
@@ -52,19 +50,13 @@ export default function AdminDashboard() {
                   >
                     {employees.map((employee) => (
                       <div className="block p-6 max-w-full  bg-gray-300 rounded-none border border-gray-200 shadow-md hover:bg-gray-200 dark:bg-gray-800 dark:border-gray-900 dark:hover:bg-gray-700">
-                        {/* <div className="flex justify-between"> */}
-                          <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            {employee.name}
-                          </h5>
-                          {/* <h5 className="text-sm font-medium text-gray-700 dark:text-white">
-                            {} semester
-                          </h5> */}
-                        {/* </div> */}
+                        <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                          {employee.name}
+                        </h5>
                       </div>
                     ))}
                   </div>
                 </a>
-
               </div>
             </div>
           </div>

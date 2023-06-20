@@ -1,16 +1,16 @@
-import { useSelector, useDispatch } from "react-redux";
-import { getEmployees, reset } from "../../features/users/userSlice";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import moment from "moment";
-import { Spinner } from "flowbite-react";
+import { useSelector, useDispatch } from 'react-redux';
+import { getEmployees, reset } from '../../features/users/userSlice';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import { Spinner } from 'flowbite-react';
 
 export default function Employees() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const { employees, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.users
+    (state) => state.users,
   );
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function Employees() {
       console.log(message);
     }
     if (!user) {
-      navigate("/login");
+      navigate('/login');
     }
     dispatch(getEmployees());
   }, [user, navigate, isError, isSuccess, message, dispatch]);
@@ -74,13 +74,11 @@ export default function Employees() {
                       key={employee._id}
                       className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                     >
-
                       <td className="py-4 px-6 capitalize">{employee.name}</td>
                       <td className="py-4 px-6">{employee.email}</td>
                       <td className="py-4 px-6">{employee.join_date}</td>
                       <td className="py-4 px-6">
-                        {moment(employee.createdAt).format("lll")}
-                        {/* {new Date(employee.createdAt).toLocaleString("en-US")} */}
+                        {moment(employee.createdAt).format('lll')}
                       </td>
                     </tr>
                   ))}

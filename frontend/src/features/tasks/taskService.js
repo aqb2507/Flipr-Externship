@@ -1,12 +1,12 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_URL = "http://localhost:9000/api/tasks/";
+const API_URL = 'http://localhost:9000/api/tasks/';
 
 // Create new task
 const addTask = async (TaskData, token) => {
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
   };
 
@@ -27,7 +27,6 @@ const getTasks = async (token, empId) => {
 
   return response.data;
 };
-
 
 const taskService = {
   addTask,

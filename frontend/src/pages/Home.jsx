@@ -1,12 +1,11 @@
-import { Fragment } from "react";
-import { Popover, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Outlet, useNavigate } from "react-router-dom";
-import MainLogo from "../assets/main-logo.png"
-import Monitoring from "../assets/monitoring.png"
+import { Fragment } from 'react';
+import { Popover, Transition } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Outlet, useNavigate } from 'react-router-dom';
+import MainLogo from '../assets/main-logo.png';
+import Monitoring from '../assets/monitoring.png';
 
 export default function Home() {
-
   return (
     <>
       <div className="relative overflow-hidden min-h-screen bg-white bg-fixed">
@@ -22,7 +21,13 @@ export default function Home() {
                     <div className="flex w-full items-center justify-between md:w-auto">
                       <a href="/">
                         <span className="sr-only">Work Tracker</span>
-                        <img className="assignment-pic" src={MainLogo} height={100} width={70} alt="" />
+                        <img
+                          className="assignment-pic"
+                          src={MainLogo}
+                          height={100}
+                          width={70}
+                          alt=""
+                        />
                       </a>
                       <div className="-mr-2 flex items-center md:hidden">
                         <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500">
@@ -33,10 +38,10 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="hidden md:ml-10 md:block md:space-x-8 md:pr-4">
-                  <h1 className="text-3xl font-mono font-bold tracking-normal text-slate-900 sm:text-3xl md:text-4xl">
-                  
-                  FLIPR <span className="font-light"> EMPLOYEE MONITORING </span>
-                      </h1>
+                    <h1 className="text-3xl font-mono font-bold tracking-normal text-slate-900 sm:text-3xl md:text-4xl">
+                      FLIPR{' '}
+                      <span className="font-light"> WORK MONITORING </span>
+                    </h1>
                   </div>
                 </nav>
               </div>
@@ -57,11 +62,7 @@ export default function Home() {
                   <div className="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5">
                     <div className="flex items-center justify-between px-5 pt-4">
                       <div>
-                        <img
-                          className="h-8 w-auto"
-                          src={MainLogo}
-                          alt=""
-                        />
+                        <img className="h-8 w-auto" src={MainLogo} alt="" />
                       </div>
                       <div className="-mr-2">
                         <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500">
@@ -72,8 +73,7 @@ export default function Home() {
                     </div>
                     <div className="space-y-1 flex justify-center px-2 pt-2 pb-3">
                       <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-3xl">
-                        {/* CHAITANYA BHARATHI INSTITUTE OF TECHNOLOGY (A) */}
-                        Flipr Employee Monitoring
+                        Flipr Work Monitoring
                       </h1>
                     </div>
                     <a
@@ -89,15 +89,14 @@ export default function Home() {
             <main className="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
               <div className="sm:text-center lg:text-left">
                 <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-                  <span className="block xl:inline">Work Monitoring</span>{" "}
+                  <span className="block xl:inline">Work Monitoring</span>{' '}
                   <span className="block text-teal-600 xl:inline">
                     Made easy for you
                   </span>
                 </h1>
                 <p className="mt-3 text-base text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
-                  Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-                  qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
-                  occaecat fugiat aliqua.
+                  Empower Your Workforce, Drive Results: Advanced Work
+                  Monitoring
                 </p>
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                   <div className="rounded-md shadow">
@@ -114,14 +113,14 @@ export default function Home() {
           </div>
         </div>
         <div className="lg:absolute lg:top-0 lg:inset-y-0 lg:right-0 lg:w-1/2 ">
-        <img
-          className="absolute object-contain -mt-14 top-0 sm:h-72 md:h-96 lg:h-full lg:w-full"
-          src={Monitoring}
-          alt=""
-        />
+          <img
+            className="absolute object-contain -mt-6 top-0 sm:h-72 md:h-96 lg:h-full lg:w-full"
+            src={Monitoring}
+            alt=""
+          />
+        </div>
       </div>
-      </div>
-      <Outlet/>
+      <Outlet />
     </>
   );
 }

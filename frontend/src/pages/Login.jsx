@@ -1,15 +1,15 @@
-import { LockClosedIcon, ArrowLeftCircleIcon } from "@heroicons/react/20/solid";
-import { useState, useEffect } from "react";
-import { Alert, Spinner } from "flowbite-react";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { login, reset } from "../features/auth/authSlice";
-import MainLogo from "../assets/main-logo.png";
+import { LockClosedIcon, ArrowLeftCircleIcon } from '@heroicons/react/20/solid';
+import { useState, useEffect } from 'react';
+import { Alert, Spinner } from 'flowbite-react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { login, reset } from '../features/auth/authSlice';
+import MainLogo from '../assets/main-logo.png';
 
 export default function Login() {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [error, setError] = useState(null);
   const [msg, setMsg] = useState(null);
@@ -20,7 +20,7 @@ export default function Login() {
   const dispatch = useDispatch();
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
+    (state) => state.auth,
   );
 
   useEffect(() => {
@@ -28,11 +28,10 @@ export default function Login() {
       setError(message);
     }
     if (isSuccess && user) {
-      if (user.role === "Admin"){
-        navigate("/admin/dashboard");
-      }
-      else {
-        navigate("/employee/dashboard");
+      if (user.role === 'Admin') {
+        navigate('/admin/dashboard');
+      } else {
+        navigate('/employee/dashboard');
       }
     }
 
@@ -88,34 +87,23 @@ export default function Login() {
       <div className="flex min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           <div>
-            {/* <img
-              className="mx-auto h-12 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=teal&shade=600"
-              alt="Your Company"
-            /> */}
             <img
               className="mx-auto h-12 w-auto"
               src={MainLogo}
               height={100}
               width={70}
               alt=""
-            /><h2 className="mt-2 text-center text-4xl font-bold tracking-tight text-slate-700">
-            Flipr Employee Monitoring
-          </h2>
+            />
+            <h2 className="mt-2 text-center text-4xl font-bold tracking-tight text-slate-700">
+              Flipr Work Monitoring
+            </h2>
             <h2 className="mt-3 mb-3 text-center text-3xl font-bold tracking-tight text-gray-900">
               Sign in to your account
             </h2>
-            {/* <p className="mb-3 text-center text-sm text-gray-600">
-              Or{' '}
-              <a href="/register" className="font-medium text-teal-600 hover:text-teal-500">
-                New here
-              </a>
-            </p> */}
             {error ? <ErrorContainer /> : <></>}
             {message ? <SuccessContainer /> : <></>}
           </div>
           <form className=" space-y-6" onSubmit={onSubmit}>
-            {/* <input type="hidden" name="remember" defaultValue="true" /> */}
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
                 <label htmlFor="email-address" className="sr-only">
@@ -188,7 +176,11 @@ export default function Login() {
                     aria-hidden="true"
                   />
                 </span>
-                {isLoading ? <Spinner aria-label="Default status example" /> :  "Sign in"}
+                {isLoading ? (
+                  <Spinner aria-label="Default status example" />
+                ) : (
+                  'Sign in'
+                )}
               </button>
             </div>
 
@@ -209,7 +201,6 @@ export default function Login() {
                 <button
                   type="button"
                   className="p-0 w-10 h-10 rounded-full border border-transparent bg-teal-600 text-sm font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                  // onClick={handleGoogleLogin}
                 >
                   <i className="fab fa-google text-base"></i>
                   {/* <FaGoogle/> */}

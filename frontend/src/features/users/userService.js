@@ -1,13 +1,13 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const API_URL = 'http://localhost:9000/api/users/'
+const API_URL = 'http://localhost:9000/api/users/';
 
 // Create new user
 const addUser = async (UserData) => {
-  const response = await axios.post(API_URL, UserData)
+  const response = await axios.post(API_URL, UserData);
 
-  return response.data
-}
+  return response.data;
+};
 
 // Get all Employees
 const getEmployees = async (token) => {
@@ -15,16 +15,16 @@ const getEmployees = async (token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }
+  };
 
-  const response = await axios.get(API_URL + 'employees', config)
+  const response = await axios.get(API_URL + 'employees', config);
 
-  return response.data
-}
+  return response.data;
+};
 
 const userService = {
   addUser,
   getEmployees,
-}
+};
 
-export default userService
+export default userService;

@@ -1,23 +1,22 @@
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
   Outlet,
-} from "react-router-dom";
-import { useSelector } from "react-redux";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Footer from "./pages/Footer";
-import Register from "./pages/admin/Register";
-import Employees from "./pages/admin/Employees";
-import AdminDashboard from "./pages/admin/Dashboard";
-import CreateTask from "./pages/employee/CreateTask";
-import EmployeeDashboard from "./pages/employee/Dashboard";
-import Admin from "./components/Admin"
-import Employee from "./components/Employee";
-
+} from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Footer from './pages/Footer';
+import Register from './pages/admin/Register';
+import Employees from './pages/admin/Employees';
+import AdminDashboard from './pages/admin/Dashboard';
+import CreateTask from './pages/employee/CreateTask';
+import EmployeeDashboard from './pages/employee/Dashboard';
+import Admin from './components/Admin';
+import Employee from './components/Employee';
 
 const AdminLayout = () => (
   <div>
@@ -58,10 +57,7 @@ function App() {
               path="admin/dashboard"
               element={
                 user ? (
-                  <Admin
-                    AdminComponent={<AdminDashboard />}
-                    dashboard={true}
-                  />
+                  <Admin AdminComponent={<AdminDashboard />} dashboard={true} />
                 ) : (
                   <Navigate replace to="/login" />
                 )
@@ -71,10 +67,7 @@ function App() {
               path="admin/employees"
               element={
                 user ? (
-                  <Admin
-                    AdminComponent={<Employees />}
-                    employees={true}
-                  />
+                  <Admin AdminComponent={<Employees />} employees={true} />
                 ) : (
                   <Navigate replace to="/login" />
                 )
@@ -87,7 +80,14 @@ function App() {
             <Route
               path="employee/dashboard"
               element={
-                user ? <Employee EmployeeComponent={<EmployeeDashboard/>} dashboard={true}/> : <Navigate replace to="/login" />
+                user ? (
+                  <Employee
+                    EmployeeComponent={<EmployeeDashboard />}
+                    dashboard={true}
+                  />
+                ) : (
+                  <Navigate replace to="/login" />
+                )
               }
             />
           </Route>
@@ -95,7 +95,11 @@ function App() {
             <Route
               path="employee/tasks"
               element={
-                user ? <Employee EmployeeComponent={<CreateTask/>} /> : <Navigate replace to="/login" />
+                user ? (
+                  <Employee EmployeeComponent={<CreateTask />} />
+                ) : (
+                  <Navigate replace to="/login" />
+                )
               }
             />
           </Route>
@@ -106,7 +110,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

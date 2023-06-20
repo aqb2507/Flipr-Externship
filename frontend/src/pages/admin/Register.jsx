@@ -1,44 +1,47 @@
-import { useState, useEffect } from "react";
-import { Alert, Spinner } from "flowbite-react";
-import { LockClosedIcon, ArrowLeftCircleIcon } from "@heroicons/react/20/solid";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Alert, Spinner } from 'flowbite-react';
+import { LockClosedIcon, ArrowLeftCircleIcon } from '@heroicons/react/20/solid';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import MainLogo from "../../assets/main-logo.png";
-import { addUser, reset } from "../../features/users/userSlice";
+import MainLogo from '../../assets/main-logo.png';
+import { addUser, reset } from '../../features/users/userSlice';
+import moment from 'moment';
 
 export default function Register() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    role: "",
-    dept: "",
-    contact: "",
-    join_date: new Date(),
-    password: "",
-    confirmPassword: "",
+    name: '',
+    email: '',
+    role: '',
+    dept: '',
+    contact: '',
+    password: '',
+    confirmPassword: '',
   });
+  const [selectedDate, setSelectedDate] = useState(null);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { name, email, role, dept, contact, join_date, password, confirmPassword } = formData;
+  const { name, email, role, dept, contact, password, confirmPassword } =
+    formData;
+  const join_date = selectedDate;
 
   const { user } = useSelector((state) => state.auth);
   const { users, isLoading, isSuccess, isError, message } = useSelector(
-    (state) => state.users
+    (state) => state.users,
   );
 
   useEffect(() => {
-    if (user.role !== "Admin"){
-      navigate("/")
+    if (user.role !== 'Admin') {
+      navigate('/');
     }
     if (isError) {
       setError(message);
     }
     if (isSuccess) {
-      navigate("/admin/dashboard");
+      navigate('/admin/dashboard');
     }
   }, [user, users, isError, isSuccess, message, navigate, dispatch, error]);
 
@@ -50,17 +53,18 @@ export default function Register() {
   };
 
   const handleDateChange = (date) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      selectedDate: date,
-    }));
+    setSelectedDate(date);
+  };
+
+  const getCurrentDate = () => {
+    return moment().format('YYYY-MM-DD');
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      setError("Password do not match");
+      setError('Password do not match');
     } else {
       const userData = {
         name,
@@ -88,7 +92,7 @@ export default function Register() {
 
   return (
     <>
-      <a onClick={() => navigate("/admin/employees")}>
+      <a onClick={() => navigate('/admin/employees')}>
         <ArrowLeftCircleIcon
           className="h-10 w-10 absolute m-4 text-teal-500 hover:text-teal-600 cursor-pointer"
           aria-hidden="true"
@@ -196,10 +200,12 @@ export default function Register() {
                     <option value="Marketing">Marketing </option>
                     <option value="Administration">Administration </option>
                     <option value="Human Resources">Human Resources </option>
-                    <option value="Operations Management">Operations Management </option>
+                    <option value="Operations Management">
+                      Operations Management{' '}
+                    </option>
                   </select>
                 </div>
-              </div>  
+              </div>
 
               <div>
                 <label htmlFor="contact-number" className="sr-only">
@@ -235,14 +241,16 @@ export default function Register() {
                     type="date"
                     value={join_date}
                     onChange={onChange}
+                    max={getCurrentDate}
                     required
-                    className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm datepicker-input"
+                    className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm"
                     placeholder="Joining Date"
                   /> */}
                   <DatePicker
                     name="join-date"
                     selected={join_date}
                     onChange={handleDateChange}
+                    maxDate={getCurrentDate}
                     className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm"
                     placeholderText="Select a date"
                   />

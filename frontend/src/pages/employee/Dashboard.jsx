@@ -1,8 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { Chart } from "react-google-charts";
-import { getTasks } from "../../features/tasks/taskSlice";
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { getTasks } from '../../features/tasks/taskSlice';
+import PieChart from '../charts/PieChart';
+import PieChart2 from '../charts/PieChart2';
+import BarChart from '../charts/BarChart';
 
 export default function EmployeeDashboard() {
   const dispatch = useDispatch();
@@ -12,52 +14,11 @@ export default function EmployeeDashboard() {
 
   useEffect(() => {
     if (!user) {
-      navigate("/login");
+      navigate('/login');
     }
     // console.log(tasks.length)
-    dispatch(getTasks());
+    dispatch(getTasks({ empId: user._id }));
   }, [user, dispatch, navigate]);
-
-  const checkIfYesterday = (day,today) => {
-    (day.getDate() === (today.getDate() - 1)) ? true : false;
-  }
-
-  const checkIfToday = (entry,today) => {
-    (entry.start_time.getDate() === today.getDate()) ? true : false;
-  }
-  const totaltasks = tasks.length;
-  const today = new Date();
-
-  const breaks = tasks.filter(
-    (task) =>
-      task.category === "Break" 
-  );
-
-  const meetings = tasks.filter(
-    (task) =>
-      task.category === "Meeting" 
-  );
-
-  const workTasks = tasks.filter(
-    (task) =>
-      task.category === "Work" 
-  );
-
-  const data = [
-    // ["Activity", "Frequency"],
-    // ["Break", breaks.length],
-    // ["Meeting", meetings.length],
-    // ["Work", workTasks.length],
-    ["Activity", "Frequency"],
-    ["Break", 1],
-    ["Meeting", 2],
-    ["Work", 3],
-  ];
-
-  const options = {
-    title: "Activity Status",
-    is3D: true,
-  };
 
   return (
     <>
@@ -78,14 +39,12 @@ export default function EmployeeDashboard() {
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div>
             <div className="grid grid-cols-1 mx-2 gap-6 md:grid-cols-2">
-              <Chart
-                chartType="PieChart"
-                data={data}
-                options={options}
-                width={"100%"}
-                height={"400px"}
-              />
+              <PieChart data={tasks} />
+              <PieChart2 data={tasks} />
             </div>
+          </div>
+          <div className="grid grid-rows-1 mx-2 gap-4 ">
+            <BarChart data={tasks} />
           </div>
         </div>
       </main>
