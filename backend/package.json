@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .}",
     "format": "prettier --write . --config ./.prettierrc",
-    "prepare": "husky install"
+    "prepare": "cd .. && husky install backend/.husky"
   },
   "author": "",
   "license": "ISC",
