@@ -52,11 +52,10 @@ const adminProtect = asyncHandler(async (req, res, next) => {
 
       // Get user from the token
       req.user = await User.findById(decoded.id).select("-password");
-    //   console.log(req.user)
-      if (req.user.role === 'Admin') {
+      //   console.log(req.user)
+      if (req.user.role === "Admin") {
         next();
-      } 
-      else {
+      } else {
         throw new Error("Access denied. Contact Administrator");
       }
     } catch (error) {

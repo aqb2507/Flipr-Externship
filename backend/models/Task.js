@@ -1,31 +1,32 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const taskSchema = new mongoose.Schema({
+const taskSchema = new mongoose.Schema(
+  {
     desc: {
-        type: String,
-        required: [true, 'Please add description']
+      type: String,
+      required: [true, "Please add description"],
     },
     category: {
-        type: String,
-        required: [true, 'Please add a type']
+      type: String,
+      required: [true, "Please add a type"],
     },
     start_time: {
-        type: Date,
-        required: [true, 'Please mention the start time'] 
+      type: Date,
+      required: [true, "Please mention the start time"],
     },
     duration: {
-        type: Number,
-        required: [true, 'Please enter the duration']
+      type: Number,
+      required: [true, "Please enter the duration"],
     },
     creator: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Employee',
-        required: true
-    }
-}, 
-    {
-    timestamps: true
-    }
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Employee",
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
 );
 
-module.exports = Task = mongoose.model('task', taskSchema);
+module.exports = Task = mongoose.model("task", taskSchema);
