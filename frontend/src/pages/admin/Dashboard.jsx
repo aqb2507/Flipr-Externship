@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import moment from 'moment';
+import { useEffect, useState } from 'react';
 import { getEmployees } from '../../features/users/userSlice';
+import { getTasks } from '../../features/tasks/taskSlice';
+import EmployeeChart from './EmployeeChart';
 
 export default function AdminDashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const { employees } = useSelector((state) => state.users);
+  const { tasks } = useSelector((state) => state.tasks);
 
   useEffect(() => {
     if (!user) {
@@ -17,6 +19,15 @@ export default function AdminDashboard() {
     // console.log(submissions.length)
     dispatch(getEmployees());
   }, [user, dispatch, navigate]);
+
+  const onClick = (employee) => {
+    dispatch(getTasks({ empId: employee._id }));
+  };
+
+  function empTasks(emp) {
+    const filteredTasks = tasks.filter((task) => task.creator === emp._id);
+    return filteredTasks.length === 0 ? [] : filteredTasks;
+  }
 
   return (
     <>
@@ -31,11 +42,8 @@ export default function AdminDashboard() {
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div>
             <div className="grid grid-rows-1 mx-2 gap-4 ">
-              <div className="grid grid-cols-3 my-10 gap-4">
-                <a
-                  href="./employees"
-                  className="block p-6 max-w-full  bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700"
-                >
+              <div className="grid grid-cols-1 my-10 gap-4">
+                <div className="block p-6 max-w-full  bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-700">
                   <div className="flex justify-between">
                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                       Employees
@@ -45,18 +53,22 @@ export default function AdminDashboard() {
                     </p>
                   </div>
                   <div
-                    id="assignments_container"
+                    id="employees_container"
                     className=" grid mt-4 w-full h-72 rounded-md dark:bg-gray-700 overflow-auto"
                   >
-                    {employees.map((employee) => (
-                      <div className="block p-6 max-w-full  bg-gray-300 rounded-none border border-gray-200 shadow-md hover:bg-gray-200 dark:bg-gray-800 dark:border-gray-900 dark:hover:bg-gray-700">
-                        <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                          {employee.name}
-                        </h5>
+                    {employees?.map((emp) => (
+                      <div key={emp._id} onClick={() => onClick(emp)}>
+                        <div>
+                          <div className="font-semibold text-xl capitalize text-base">
+                            {emp.name}
+                          </div>
+                          <div className="text-xs opacity-50">{emp.dept}</div>
+                        </div>
+                        <EmployeeChart emp={emp} tasks={empTasks(emp)} />
                       </div>
                     ))}
                   </div>
-                </a>
+                </div>
               </div>
             </div>
           </div>

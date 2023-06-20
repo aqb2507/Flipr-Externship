@@ -56,10 +56,6 @@ export default function Register() {
     setSelectedDate(date);
   };
 
-  const getCurrentDate = () => {
-    return moment().format('YYYY-MM-DD');
-  };
-
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -250,7 +246,7 @@ export default function Register() {
                     name="join-date"
                     selected={join_date}
                     onChange={handleDateChange}
-                    maxDate={getCurrentDate}
+                    maxDate={new Date()}
                     className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm"
                     placeholderText="Select a date"
                   />
