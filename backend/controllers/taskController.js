@@ -1,5 +1,5 @@
-const asyncHandler = require("express-async-handler");
-const Task = require("../models/Task");
+const asyncHandler = require('express-async-handler');
+const Task = require('../models/Task');
 
 // @desc    Add new task by Employee
 // @route   POST /api/tasks
@@ -8,19 +8,19 @@ const Task = require("../models/Task");
 const addTask = asyncHandler(async (req, res) => {
   if (!req.body.desc) {
     res.status(400);
-    throw new Error("Please add task description");
+    throw new Error('Please add task description');
   }
   if (!req.body.category) {
     res.status(400);
-    throw new Error("Please add task type");
+    throw new Error('Please add task type');
   }
   if (!req.body.start_time) {
     res.status(400);
-    throw new Error("Please mention the start time");
+    throw new Error('Please mention the start time');
   }
   if (!req.body.duration) {
     res.status(400);
-    throw new Error("Please add task duration");
+    throw new Error('Please add task duration');
   }
 
   const task = await Task.create({

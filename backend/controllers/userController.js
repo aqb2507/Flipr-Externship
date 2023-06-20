@@ -1,14 +1,14 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const asyncHandler = require("express-async-handler");
-const User = require("../models/User");
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const asyncHandler = require('express-async-handler');
+const User = require('../models/User');
 
 // Generate JWT
 // JWT_SECRET = 'flipr-webdev'
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
+    expiresIn: '30d',
   });
 };
 
@@ -28,7 +28,7 @@ const registerUser = asyncHandler(async (req, res) => {
     !password
   ) {
     res.status(400);
-    throw new Error("Please enter all fields");
+    throw new Error('Please enter all fields');
   }
 
   // check if user exits
@@ -36,7 +36,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if (userExists) {
     res.status(400);
-    throw new Error("User already exists");
+    throw new Error('User already exists');
   }
 
   // Hash password
@@ -67,7 +67,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new Error("Invalid user data");
+    throw new Error('Invalid user data');
   }
 });
 
@@ -94,7 +94,7 @@ const loginUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new Error("Invalid credentials");
+    throw new Error('Invalid credentials');
   }
 });
 
@@ -103,7 +103,7 @@ const loginUser = asyncHandler(async (req, res) => {
 // @access  Admin
 
 const getEmployees = asyncHandler(async (req, res) => {
-  const employees = await User.find({ role: "Employee" });
+  const employees = await User.find({ role: 'Employee' });
   res.status(200).json(employees);
 });
 

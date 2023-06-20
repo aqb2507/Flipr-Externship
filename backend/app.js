@@ -1,8 +1,8 @@
-const express = require("express");
-var cors = require("cors");
-const dotenv = require("dotenv").config();
-const connectDB = require("./config/db");
-const { errorHandler } = require("./middlewares/errorHandler");
+const express = require('express');
+var cors = require('cors');
+const dotenv = require('dotenv').config();
+const connectDB = require('./config/db');
+const { errorHandler } = require('./middlewares/errorHandler');
 
 const app = express();
 
@@ -17,10 +17,10 @@ app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: true }));
 
 // router
-const users = require("./routes/userRoutes");
-const tasks = require("./routes/taskRoutes");
-app.use("/api/users", users);
-app.use("/api/tasks", tasks);
+const users = require('./routes/userRoutes');
+const tasks = require('./routes/taskRoutes');
+app.use('/api/users', users);
+app.use('/api/tasks', tasks);
 
 app.use(errorHandler);
 
