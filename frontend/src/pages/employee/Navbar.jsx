@@ -24,7 +24,7 @@ export default function Navbar(props) {
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <a href="/">
+                  <a href="./dashboard">
                     <img
                       className="h-12 w-12"
                       src={MainLogo}
