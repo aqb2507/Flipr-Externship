@@ -16,7 +16,6 @@
     "mdb-react-ui-kit": "^6.1.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",
-    "react-clock": "^4.2.0",
     "react-datepicker": "^4.12.0",
     "react-datetime-picker": "^5.2.0",
     "react-dom": "^18.2.0",
@@ -32,15 +31,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "cd .. && husky install frontend/.husky"
-  },
-  "lint-staged": {
-    "*.{js,ts,tsx, jsx}": [
-      "eslint --quiet --fix"
-    ],
-    "*.{json,md,html,js,jsx,ts,tsx}": [
-      "prettier --write"
-    ]
+    "lint": "eslint ./src",
+    "lint:fix": "eslint --fix ./src}",
+    "format": "prettier --write . --config ./.prettierrc",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
