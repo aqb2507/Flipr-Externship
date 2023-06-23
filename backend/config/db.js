@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 
-const db = process.env.onlineURI
+const db = process.env.onlineURI;
 //const dboffline = process.env.offlineURI;
 
 const connectDB = async () => {
