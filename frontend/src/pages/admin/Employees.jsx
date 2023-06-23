@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { getEmployees, reset } from '../../features/users/userSlice';
+import { getEmployees, deleteUser, reset } from '../../features/users/userSlice';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
@@ -22,6 +22,16 @@ export default function Employees() {
     }
     dispatch(getEmployees());
   }, [user, navigate, isError, isSuccess, message, dispatch]);
+
+  const handleDelete = (employee) => {
+    const choice = window.confirm(
+      `Are you sure you want remove ${employee.name}`
+    );
+    if (choice) {
+      dispatch(deleteUser(employee._id));
+      dispatch(reset());
+    }
+  }; 
 
   if (isLoading) {
     return (
@@ -79,6 +89,14 @@ export default function Employees() {
                       <td className="py-4 px-6">{employee.join_date}</td>
                       <td className="py-4 px-6">
                         {moment(employee.createdAt).format('lll')}
+                      </td>
+                      <td className="py-4 px-6">
+                        <button
+                          className="rounded border border-transparent bg-rose-600 text-sm font-medium text-white px-5 py-2 text-center hover:bg-rose-700"
+                          onClick={() => handleDelete(employee)}
+                        >
+                          remove
+                        </button>
                       </td>
                     </tr>
                   ))}

@@ -12,10 +12,10 @@ export default function Navbar(props) {
   const { navigation, user, onLogout } = props;
 
   const userNavigation = [
-    { name: 'Your Profile', href: '#' },
+    { name: 'Your Profile', href: './profile' },
     { name: 'Settings', href: '#' },
-    // { name: "Sign out", href: "/", onClick: {} },
   ];
+  
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (

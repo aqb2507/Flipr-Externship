@@ -9,6 +9,19 @@ const addUser = async (UserData) => {
   return response.data;
 };
 
+// Delete user
+const deleteUser = async (token, userId) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await axios.delete(API_URL + userId, config)
+
+  return response.data
+}
+
 // Get all Employees
 const getEmployees = async (token) => {
   const config = {
@@ -24,6 +37,7 @@ const getEmployees = async (token) => {
 
 const userService = {
   addUser,
+  deleteUser,
   getEmployees,
 };
 

@@ -12,8 +12,10 @@ import Login from './pages/Login';
 import Footer from './pages/Footer';
 import Register from './pages/admin/Register';
 import Employees from './pages/admin/Employees';
+import AdminProfile from './pages/admin/AdminProfile';
 import AdminDashboard from './pages/admin/Dashboard';
 import CreateTask from './pages/employee/CreateTask';
+import EmployeeProfile from './pages/employee/EmployeeProfile';
 import EmployeeDashboard from './pages/employee/Dashboard';
 import Admin from './components/Admin';
 import Employee from './components/Employee';
@@ -73,7 +75,19 @@ function App() {
                 )
               }
             />
-          </Route>
+            <Route
+                path="admin/profile"
+                element={
+                  user ? (
+                    <Admin
+                      AdminComponent={<AdminProfile />}
+                    />
+                  ) : (
+                    <Navigate replace to="/login" />
+                  )
+                }
+              />
+            </Route>
 
           {/* Employee Routes */}
           <Route element={<EmployeeLayout />}>
@@ -90,8 +104,6 @@ function App() {
                 )
               }
             />
-          </Route>
-          <Route element={<EmployeeLayout />}>
             <Route
               path="employee/tasks"
               element={
@@ -100,6 +112,12 @@ function App() {
                 ) : (
                   <Navigate replace to="/login" />
                 )
+              }
+            />
+            <Route
+              path="employee/profile"
+              element={
+                user ? <Employee EmployeeComponent={<EmployeeProfile/>} /> : <Navigate replace to="/login" />
               }
             />
           </Route>

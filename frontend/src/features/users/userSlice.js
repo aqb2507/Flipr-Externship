@@ -28,6 +28,25 @@ export const addUser = createAsyncThunk(
   },
 );
 
+// Delete user
+export const deleteUser = createAsyncThunk(
+  'users/delete',
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await userService.deleteUser(token, id)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 // Get all Employees
 export const getEmployees = createAsyncThunk(
   'users/getEmployees',
@@ -80,7 +99,25 @@ export const userSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-      });
+      })
+      .addCase(deleteUser.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.users = state.users.filter(
+          (user) => user._id !== action.payload.id
+        )
+        state.employees = state.employees.filter(
+          (employee) => employee._id !== action.payload.id
+        )
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
   },
 });
 
