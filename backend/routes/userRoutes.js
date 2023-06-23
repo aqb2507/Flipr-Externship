@@ -14,8 +14,6 @@ router.post('/', registerUser);
 router.post('/login', loginUser);
 router.get('/me', protect, getUser);
 router.get('/employees', adminProtect, getEmployees);
-router.route('/:id')
-    .put(protect, updateUser)
-    .delete(adminProtect, deleteUser);
+router.route('/:id').put(protect, updateUser).delete(adminProtect, deleteUser);
 
 module.exports = router;

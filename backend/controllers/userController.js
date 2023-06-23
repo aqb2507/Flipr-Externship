@@ -102,56 +102,52 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route   PUT /api/users/:id
 // @access  Private
 
-const updateUser = asyncHandler(
-  async (req, res) => {
-      const user = await User.findById(req.params.id)
-      if(!user){
-          res.status(400)
-          throw new Error('User not found');
-      }
-
-      // Check for user
-      if(!req.user){
-          res.status(401)
-          throw new Error('Not Authenticated');
-      }
-
-       // Hash password
-      const salt = await bcrypt.genSalt(10)
-      const hashedPassword = await bcrypt.hash(req.body.password, salt)
-      req.body.password = hashedPassword;
-
-      const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-          new: true,
-      })
-
-      res.status(200).json(updatedUser);
+const updateUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (!user) {
+    res.status(400);
+    throw new Error('User not found');
   }
-)
+
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error('Not Authenticated');
+  }
+
+  // Hash password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+  req.body.password = hashedPassword;
+
+  const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+
+  res.status(200).json(updatedUser);
+});
 
 // @desc    Delete User
 // @route   DELETE /api/users/:id
 // @access  Admin
 
-const deleteUser = asyncHandler(
-  async (req, res) => {
-      const user = await User.findById(req.params.id)
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
 
-      if(!user){
-          res.status(400)
-          throw new Error('User not found');
-      }
-      // Check for user
-      if(!req.user){
-          res.status(401)
-          throw new Error('Not Authorized');
-      }
-
-      await user.deleteOne();
-
-      res.status(200).json({ id: req.params.id });
+  if (!user) {
+    res.status(400);
+    throw new Error('User not found');
   }
-)
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error('Not Authorized');
+  }
+
+  await user.deleteOne();
+
+  res.status(200).json({ id: req.params.id });
+});
 
 // @desc    Get Employee data
 // @route   GET /api/users/employees
