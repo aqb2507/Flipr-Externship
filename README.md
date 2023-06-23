@@ -19,3 +19,6 @@
 - for formatting using prettier - 'npm run format'
 
 Note: A husky is set up for both backend and frontend to run lint and format commands when performing a 'git commit'.
+
+### To run docker:
+docker-compose up
