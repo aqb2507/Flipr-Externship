@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 
-// const db = process.env.onlineURI
-const dboffline = process.env.offlineURI;
+const db = process.env.onlineURI
+//const dboffline = process.env.offlineURI;
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(dboffline, {
+    await mongoose.connect(db, {
       useNewUrlParser: true,
     });
 
