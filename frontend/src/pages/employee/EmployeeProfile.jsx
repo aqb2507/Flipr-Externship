@@ -1,13 +1,13 @@
-import userPic from "../../assets/user.webp";
-import { useDispatch, useSelector } from "react-redux";
-import { logout, updateUser } from "../../features/auth/authSlice";
-import { Alert, Spinner } from "flowbite-react";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import userPic from '../../assets/user.webp';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, updateUser } from '../../features/auth/authSlice';
+import { Alert, Spinner } from 'flowbite-react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function EmployeeProfile() {
   const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
+    (state) => state.auth,
   );
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -15,8 +15,8 @@ export default function EmployeeProfile() {
   const [formData, setFormData] = useState({
     name: user.name,
     contact: user.contact,
-    password: "",
-    confirmPassword: "",
+    password: '',
+    confirmPassword: '',
   });
 
   const [error, setError] = useState(null);
@@ -29,11 +29,11 @@ export default function EmployeeProfile() {
       setError(message);
     }
     if (!user) {
-      navigate("/login");
+      navigate('/login');
     }
     if (isSuccess) {
       dispatch(logout());
-      navigate("/login");
+      navigate('/login');
     }
   }, [user, navigate, isError, isSuccess, isLoading, message, dispatch]);
 
@@ -48,7 +48,7 @@ export default function EmployeeProfile() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      setError("Password do not match");
+      setError('Password do not match');
     } else {
       const userData = {
         name,
@@ -57,10 +57,10 @@ export default function EmployeeProfile() {
       };
 
       dispatch(updateUser(userData));
-      alert("User updated successfully.");
+      alert('User updated successfully.');
     }
     if (isSuccess && !isError) {
-      setMsg("User updated successfully!");
+      setMsg('User updated successfully!');
     }
   };
 
@@ -83,11 +83,11 @@ export default function EmployeeProfile() {
       <Alert color="success">
         <span>
           <span className="font-medium">
-            Success! User Updated Successfully.{" "}
+            Success! User Updated Successfully.{' '}
             <a className=" font-semibold text-teal-700" href="/login">
               please login again
             </a>
-          </span>{" "}
+          </span>{' '}
           {msg}
         </span>
       </Alert>
@@ -96,7 +96,7 @@ export default function EmployeeProfile() {
 
   return (
     <div>
-      {" "}
+      {' '}
       <header className="bg-white shadow">
         <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900">
