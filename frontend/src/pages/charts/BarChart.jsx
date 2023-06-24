@@ -56,16 +56,31 @@ const BarChart = ({ data }) => {
   ];
 
   const options = {
-    title: 'Overview of the Week so far...',
+    title: 'Activity Overview of this Week so far (in number)',
+    titleTextStyle: {
+      color: '#1F2937',
+      fontName: 'Century Gothic',
+      fontSize: 22,
+    },
     chartArea: { width: '50%' },
     colors: ['#98DED7', '#00AA9F', '#115E59'],
     isStacked: true,
     hAxis: {
       title: 'Activities',
+      titleTextStyle: {
+        color: '#1F2937',
+        fontName: 'Century Gothic',
+        fontSize: 18,
+      },
       minValue: 0,
     },
     vAxis: {
       title: 'Day',
+      titleTextStyle: {
+        color: '#1F2937',
+        fontName: 'Century Gothic',
+        fontSize: 18,
+      },
     },
   };
 

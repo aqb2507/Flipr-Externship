@@ -93,7 +93,6 @@ export default function CreateTask() {
           aria-hidden="true"
         />
       </a>
-      {/* <div className="flex flex-col min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8"> */}
       <div className="md:w-3/4 min-h-screen items-center justify-center py-12 px-12">
         <Card>
           <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -101,12 +100,7 @@ export default function CreateTask() {
           </h5>
           {error ? <ErrorContainer /> : <></>}
           {msg ? <SuccessContainer /> : <></>}
-          <form
-            className="min-w-full mt-2"
-            // encType="multipart/form-data"
-            // method="POST"
-            onSubmit={onSubmit}
-          >
+          <form className="min-w-full mt-2" onSubmit={onSubmit}>
             <div className="mb-6">
               <label
                 htmlFor="desc"
@@ -128,7 +122,7 @@ export default function CreateTask() {
             <div className="mb-6">
               <div id="select">
                 <div className="mb-2 block">
-                  <Label htmlFor="category" value="Select the type" />
+                  <Label htmlFor="category" value="Task Type" />
                 </div>
                 <Select
                   id="category"
@@ -136,8 +130,11 @@ export default function CreateTask() {
                   value={category}
                   onChange={onChange}
                   required={true}
+                  placeholder="Select a type"
                 >
-                  <option>Select a type</option>
+                  <option value="" disabled selected hidden>
+                    Select a type
+                  </option>
                   <option value="Break"> Break </option>
                   <option value="Meeting"> Meeting </option>
                   <option value="Work"> Work </option>
