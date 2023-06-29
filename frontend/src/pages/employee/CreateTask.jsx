@@ -1,10 +1,11 @@
+import moment from 'moment';
 import React, { useState, useEffect } from 'react';
 import { Alert, Card, Label, Select, Spinner } from 'flowbite-react';
 import { LockClosedIcon, ArrowLeftCircleIcon } from '@heroicons/react/20/solid';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import DateTimePicker from 'react-datetime-picker';
-import 'react-datetime-picker/dist/DateTimePicker.css';
+// import DateTimePicker from 'react-datetime-picker';
+// import 'react-datetime-picker/dist/DateTimePicker.css';
 import { addTask, reset } from '../../features/tasks/taskSlice';
 
 export default function CreateTask() {
@@ -41,8 +42,8 @@ export default function CreateTask() {
     }));
   };
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
   };
 
   const onSubmit = (e) => {
@@ -124,10 +125,11 @@ export default function CreateTask() {
                 <div className="mb-2 block">
                   <Label htmlFor="category" value="Task Type" />
                 </div>
-                <Select
+                <select
                   id="category"
                   name="category"
                   value={category}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
                   onChange={onChange}
                   required={true}
                   placeholder="Select a type"
@@ -138,7 +140,7 @@ export default function CreateTask() {
                   <option value="Break"> Break </option>
                   <option value="Meeting"> Meeting </option>
                   <option value="Work"> Work </option>
-                </Select>
+                </select>
               </div>
             </div>
 
@@ -150,12 +152,23 @@ export default function CreateTask() {
                 Start Time
               </label>
 
-              <DateTimePicker
+              {/* <DateTimePicker
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
                 placeholder="Select date and time"
                 value={start_time}
                 maxDate={new Date()}
                 onChange={handleDateChange}
+              /> */}
+              <input
+                type="datetime-local"
+                id="time"
+                name="time"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+                placeholder="Select date and time"
+                value={start_time}
+                max={moment().format('YYYY-MM-DDTHH:mm')}
+                onChange={handleDateChange}
+                required
               />
             </div>
             <div className="mb-6">

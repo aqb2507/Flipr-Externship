@@ -66,7 +66,7 @@ const BarChart = ({ data }) => {
     colors: ['#98DED7', '#00AA9F', '#115E59'],
     isStacked: true,
     hAxis: {
-      title: 'Activities',
+      title: 'Activity Count',
       titleTextStyle: {
         color: '#1F2937',
         fontName: 'Century Gothic',
